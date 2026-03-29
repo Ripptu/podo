@@ -521,7 +521,7 @@ export default function App() {
       </header>
 
       {/* --- Hero Section --- */}
-      <section className="relative pt-24 pb-32 lg:pt-32 lg:pb-48 overflow-hidden min-h-[80vh] flex items-center">
+      <section className="relative pt-12 pb-32 lg:pt-32 lg:pb-48 overflow-hidden min-h-[80vh] flex items-center">
         {/* Background Video */}
         <div className="absolute inset-0 w-full h-full z-0 overflow-hidden" style={{ pointerEvents: 'none' }}>
           <video 
@@ -530,6 +530,7 @@ export default function App() {
             muted 
             playsInline 
             loop 
+            controls={false}
             disablePictureInPicture
             tabIndex={-1}
             className="w-full h-full object-cover pointer-events-none"
