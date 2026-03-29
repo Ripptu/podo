@@ -421,19 +421,10 @@ export default function App() {
       {/* --- Header --- */}
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'glass-card border-b-0' : 'bg-transparent border-b-0'}`}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-end items-center h-20">
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-8">
-              <a href="#leistungen" className="text-sm font-medium text-text-muted hover:text-primary transition-colors">{t.nav.leistungen}</a>
-              <a href="#standorte" className="text-sm font-medium text-text-muted hover:text-primary transition-colors">{t.nav.standorte}</a>
-              <a href="#preise" className="text-sm font-medium text-text-muted hover:text-primary transition-colors">{t.nav.preise}</a>
-              <a href="#karriere" className="text-sm font-medium text-text-muted hover:text-primary transition-colors">{t.nav.karriere}</a>
-            </nav>
-
-            {/* Desktop Actions */}
-            <div className="hidden md:flex items-center gap-4">
-              {/* Language Switcher */}
-              <div className="relative">
+        <div className="flex justify-between items-center h-20">
+            <div className="flex-1 flex justify-start">
+            {/* Language Switcher */}
+            <div className="relative">
                 <button 
                   onClick={() => setLangDropdownOpen(!langDropdownOpen)}
                   aria-label="Sprache wechseln / Change language"
@@ -451,7 +442,7 @@ export default function App() {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
-                      className="absolute right-0 mt-2 w-32 bg-white rounded-xl shadow-xl border border-gray-100 py-1 overflow-hidden"
+                      className="absolute left-0 mt-2 w-32 bg-white rounded-xl shadow-xl border border-gray-100 py-1 overflow-hidden"
                     >
                       {languages.map((lang) => (
                         <button
@@ -466,7 +457,18 @@ export default function App() {
                   )}
                 </AnimatePresence>
               </div>
+            </div>
 
+            {/* Desktop Nav */}
+            <nav className="hidden md:flex flex-1 items-center gap-8 justify-center">
+              <a href="#leistungen" className="text-sm font-medium text-text-muted hover:text-primary transition-colors">{t.nav.leistungen}</a>
+              <a href="#standorte" className="text-sm font-medium text-text-muted hover:text-primary transition-colors">{t.nav.standorte}</a>
+              <a href="#preise" className="text-sm font-medium text-text-muted hover:text-primary transition-colors">{t.nav.preise}</a>
+              <a href="#karriere" className="text-sm font-medium text-text-muted hover:text-primary transition-colors">{t.nav.karriere}</a>
+            </nav>
+
+            {/* Desktop Actions */}
+            <div className="hidden md:flex flex-1 items-center gap-4 justify-end">
               <WhatsAppButton text={t.nav.whatsapp} />
             </div>
 
@@ -522,22 +524,14 @@ export default function App() {
 
       {/* --- Hero Section --- */}
       <section className="relative pt-12 pb-32 lg:pt-32 lg:pb-48 overflow-hidden min-h-[80vh] flex items-center">
-        {/* Background Video */}
+        {/* Background Image */}
         <div className="absolute inset-0 w-full h-full z-0 overflow-hidden" style={{ pointerEvents: 'none' }}>
-          <video 
-            ref={videoRef}
-            autoPlay 
-            muted 
-            playsInline 
-            loop 
-            controls={false}
-            disablePictureInPicture
-            tabIndex={-1}
-            className="w-full h-full object-cover pointer-events-none"
-            style={{ pointerEvents: 'none' }}
-          >
-            <source src="https://eu-central.storage.cloudconvert.com/tasks/a703f6ab-4949-482c-9509-d6da9f4f2b1a/hf_20260329_065424_4132dde9-834c-4eb7-92a2-71b43a390dca.webm?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=cloudconvert-production%2F20260329%2Ffra%2Fs3%2Faws4_request&X-Amz-Date=20260329T070447Z&X-Amz-Expires=86400&X-Amz-Signature=0d95e9a9d58034b665183f43211ae2d631f0eff54d4602627d47224d3677239a&X-Amz-SignedHeaders=host&response-content-disposition=inline%3B%20filename%3D%22hf_20260329_065424_4132dde9-834c-4eb7-92a2-71b43a390dca.webm%22&response-content-type=video%2Fwebm&x-id=GetObject" type="video/webm" />
-          </video>
+          <img 
+            src="https://s1.directupload.eu/images/260329/i3o9zgr2.webp" 
+            alt="Hero Background" 
+            className="w-full h-full object-cover"
+            referrerPolicy="no-referrer"
+          />
         </div>
         {/* White Gradient Overlay */}
         <div className="absolute inset-0 w-full h-full z-10 bg-gradient-to-b from-white/20 via-white/50 to-surface"></div>
@@ -581,19 +575,19 @@ export default function App() {
       <section className="pt-24 pb-12 lg:pt-32 lg:pb-16 bg-surface">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-sm font-semibold tracking-widest text-text-muted uppercase mb-8">{t.trusted.title}</p>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-80 grayscale hover:grayscale-0 transition-all duration-500">
+          <div className="flex flex-nowrap justify-center items-center gap-8 md:gap-16 opacity-80 grayscale hover:grayscale-0 transition-all duration-500">
             {/* Simulating logos with text/stars for this specific request */}
             <div className="flex flex-col items-center gap-2">
               <div className="flex text-yellow-400"><Star className="w-5 h-5 fill-current"/><Star className="w-5 h-5 fill-current"/><Star className="w-5 h-5 fill-current"/><Star className="w-5 h-5 fill-current"/><Star className="w-5 h-5 fill-current"/></div>
               <span className="font-bold text-lg text-text-main">Google Reviews</span>
             </div>
             <div className="hidden md:block w-px h-12 bg-gray-200"></div>
-            <div className="max-w-xs text-left">
+            <div className="text-left">
               <p className="text-sm italic text-text-muted">{t.trusted.review1}</p>
               <p className="text-xs font-bold mt-2 text-text-main">{t.trusted.patient1}</p>
             </div>
             <div className="hidden lg:block w-px h-12 bg-gray-200"></div>
-            <div className="max-w-xs text-left hidden lg:block">
+            <div className="text-left hidden lg:block">
               <p className="text-sm italic text-text-muted">{t.trusted.review2}</p>
               <p className="text-xs font-bold mt-2 text-text-main">{t.trusted.patient2}</p>
             </div>
@@ -767,7 +761,7 @@ export default function App() {
       {/* --- Testimonials --- */}
       <section className="py-20 md:py-32 bg-surface">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
+          <div className="flex flex-col lg:flex-row gap-20 items-center">
             
             <div className="relative">
               {/* Main Image */}
@@ -803,13 +797,15 @@ export default function App() {
                 <svg className="absolute -top-8 -left-10 w-20 h-20 text-primary/10" fill="currentColor" viewBox="0 0 32 32">
                   <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
                 </svg>
-                <p className="text-xl md:text-2xl font-medium text-text-main leading-relaxed relative z-10 mb-10">
-                  {t.testimonials.quote}
-                </p>
-                <div className="flex items-center gap-5">
-                  <div>
-                    <p className="font-bold text-lg text-text-main">{t.testimonials.author}</p>
-                    <p className="text-base text-text-muted">{t.testimonials.author_sub}</p>
+                <div className="flex flex-col md:flex-row items-center gap-10">
+                  <p className="text-xl md:text-2xl font-medium text-text-main leading-relaxed relative z-10">
+                    {t.testimonials.quote}
+                  </p>
+                  <div className="flex items-center gap-5 shrink-0">
+                    <div>
+                      <p className="font-bold text-lg text-text-main">{t.testimonials.author}</p>
+                      <p className="text-base text-text-muted">{t.testimonials.author_sub}</p>
+                    </div>
                   </div>
                 </div>
               </div>
