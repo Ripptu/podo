@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Activity, 
@@ -393,6 +393,16 @@ export default function App() {
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [currentLang, setCurrentLang] = useState('Deutsch');
   const [isScrolled, setIsScrolled] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    // Force video to play on mobile (iOS Safari workaround)
+    if (videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.log("Autoplay prevented:", error);
+      });
+    }
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -409,7 +419,7 @@ export default function App() {
     <div className="min-h-screen bg-surface font-sans text-text-main overflow-x-hidden">
       <main>
       {/* --- Header --- */}
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'glass-card border-b border-gray-100' : 'bg-transparent'}`}>
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'glass-card' : 'bg-transparent'}`}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
@@ -508,13 +518,16 @@ export default function App() {
       {/* --- Hero Section --- */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden min-h-[80vh] flex items-center">
         {/* Background Video */}
-        <div className="absolute inset-0 w-full h-full z-0">
+        <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
           <video 
+            ref={videoRef}
             autoPlay 
             loop 
             muted 
+            defaultMuted
             playsInline 
-            className="w-full h-full object-cover"
+            disablePictureInPicture
+            className="w-full h-full object-cover pointer-events-none"
           >
             <source src="https://eu-central.storage.cloudconvert.com/tasks/a703f6ab-4949-482c-9509-d6da9f4f2b1a/hf_20260329_065424_4132dde9-834c-4eb7-92a2-71b43a390dca.webm?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=cloudconvert-production%2F20260329%2Ffra%2Fs3%2Faws4_request&X-Amz-Date=20260329T070447Z&X-Amz-Expires=86400&X-Amz-Signature=0d95e9a9d58034b665183f43211ae2d631f0eff54d4602627d47224d3677239a&X-Amz-SignedHeaders=host&response-content-disposition=inline%3B%20filename%3D%22hf_20260329_065424_4132dde9-834c-4eb7-92a2-71b43a390dca.webm%22&response-content-type=video%2Fwebm&x-id=GetObject" type="video/webm" />
           </video>
@@ -794,7 +807,7 @@ export default function App() {
       </section>
 
       {/* --- Job / Karriere --- */}
-      <section id="karriere" className="py-20 md:py-32 bg-primary text-white overflow-hidden relative">
+      <section id="karriere" className="py-16 md:py-24 bg-primary text-white overflow-hidden relative">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
         
@@ -822,8 +835,8 @@ export default function App() {
               <WhatsAppButton text={t.career.btn} className="bg-gray-100 text-black hover:bg-white border-none" />
             </div>
 
-            <div className="relative">
-              <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20">
+            <div className="relative flex justify-center lg:justify-end">
+              <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 max-w-md">
                 <img 
                   src="https://s1.directupload.eu/images/260329/ik4dynqw.webp" 
                   alt="Praxis Team" 
