@@ -516,7 +516,7 @@ export default function App() {
       </header>
 
       {/* --- Hero Section --- */}
-      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden min-h-[80vh] flex items-center">
+      <section className="relative pt-32 pb-32 lg:pt-48 lg:pb-48 overflow-hidden min-h-[80vh] flex items-center">
         {/* Background Video */}
         <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
           <video 
@@ -541,6 +541,12 @@ export default function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
+            <img 
+              src="https://s1.directupload.eu/images/260329/372mrr6f.gif" 
+              alt="Podo Aktiv Logo" 
+              className="h-24 md:h-32 w-auto mx-auto mb-10 object-contain"
+              referrerPolicy="no-referrer"
+            />
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6 text-text-main">
               {t.hero.title1} <span className="text-primary font-serif italic font-normal relative inline-block">
                 {t.hero.title2}
@@ -565,7 +571,7 @@ export default function App() {
       </section>
 
       {/* --- Trusted By Section --- */}
-      <section className="py-12 bg-surface">
+      <section className="pt-24 pb-12 lg:pt-32 lg:pb-16 bg-surface">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-sm font-semibold tracking-widest text-text-muted uppercase mb-8">{t.trusted.title}</p>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-80 grayscale hover:grayscale-0 transition-all duration-500">
