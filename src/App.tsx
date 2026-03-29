@@ -419,7 +419,7 @@ export default function App() {
     <div className="min-h-screen bg-surface font-sans text-text-main overflow-x-hidden">
       <main>
       {/* --- Header --- */}
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'glass-card' : 'bg-transparent'}`}>
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'glass-card border-b-0' : 'bg-transparent border-b-0'}`}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
@@ -516,9 +516,9 @@ export default function App() {
       </header>
 
       {/* --- Hero Section --- */}
-      <section className="relative pt-32 pb-32 lg:pt-48 lg:pb-48 overflow-hidden min-h-[80vh] flex items-center">
+      <section className="relative pt-24 pb-32 lg:pt-32 lg:pb-48 overflow-hidden min-h-[80vh] flex items-center">
         {/* Background Video */}
-        <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
+        <div className="absolute inset-0 w-full h-full z-0 overflow-hidden" style={{ pointerEvents: 'none' }}>
           <video 
             ref={videoRef}
             autoPlay 
@@ -527,7 +527,9 @@ export default function App() {
             defaultMuted
             playsInline 
             disablePictureInPicture
+            tabIndex={-1}
             className="w-full h-full object-cover pointer-events-none"
+            style={{ pointerEvents: 'none' }}
           >
             <source src="https://eu-central.storage.cloudconvert.com/tasks/a703f6ab-4949-482c-9509-d6da9f4f2b1a/hf_20260329_065424_4132dde9-834c-4eb7-92a2-71b43a390dca.webm?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=cloudconvert-production%2F20260329%2Ffra%2Fs3%2Faws4_request&X-Amz-Date=20260329T070447Z&X-Amz-Expires=86400&X-Amz-Signature=0d95e9a9d58034b665183f43211ae2d631f0eff54d4602627d47224d3677239a&X-Amz-SignedHeaders=host&response-content-disposition=inline%3B%20filename%3D%22hf_20260329_065424_4132dde9-834c-4eb7-92a2-71b43a390dca.webm%22&response-content-type=video%2Fwebm&x-id=GetObject" type="video/webm" />
           </video>
@@ -544,7 +546,7 @@ export default function App() {
             <img 
               src="https://s1.directupload.eu/images/260329/372mrr6f.gif" 
               alt="Podo Aktiv Logo" 
-              className="h-24 md:h-32 w-auto mx-auto mb-10 object-contain"
+              className="h-48 md:h-64 w-auto mx-auto mb-10 object-contain"
               referrerPolicy="no-referrer"
             />
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6 text-text-main">
