@@ -421,17 +421,7 @@ export default function App() {
       {/* --- Header --- */}
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'glass-card border-b-0' : 'bg-transparent border-b-0'}`}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            {/* Logo */}
-            <div className="flex items-center gap-2">
-              <img 
-                src="https://s1.directupload.eu/images/260329/372mrr6f.gif" 
-                alt="Podo Aktiv Logo" 
-                className="w-10 h-10 object-contain" 
-              />
-              <span className="text-2xl font-bold tracking-tight text-primary">Podo Aktiv</span>
-            </div>
-
+          <div className="flex justify-end items-center h-20">
             {/* Desktop Nav */}
             <nav className="hidden md:flex items-center gap-8">
               <a href="#leistungen" className="text-sm font-medium text-text-muted hover:text-primary transition-colors">{t.nav.leistungen}</a>
@@ -502,6 +492,21 @@ export default function App() {
               className="md:hidden bg-white border-t border-gray-100 overflow-hidden"
             >
               <div className="px-4 py-6 space-y-4 flex flex-col">
+                {/* Language Switcher Mobile */}
+                <div className="flex items-center gap-4 pb-4 border-b border-gray-100">
+                  <span className="text-sm font-medium text-text-muted">Sprache:</span>
+                  <div className="flex gap-2">
+                    {languages.map((lang) => (
+                      <button
+                        key={lang}
+                        onClick={() => { setCurrentLang(lang); setIsMobileMenuOpen(false); }}
+                        className={`px-3 py-1 text-sm rounded-full transition-colors ${currentLang === lang ? 'text-white bg-primary' : 'text-text-muted bg-gray-100'}`}
+                      >
+                        {lang}
+                      </button>
+                    ))}
+                  </div>
+                </div>
                 <a href="#leistungen" onClick={() => setIsMobileMenuOpen(false)} className="text-base font-medium text-text-main">{t.nav.leistungen}</a>
                 <a href="#standorte" onClick={() => setIsMobileMenuOpen(false)} className="text-base font-medium text-text-main">{t.nav.standorte}</a>
                 <a href="#preise" onClick={() => setIsMobileMenuOpen(false)} className="text-base font-medium text-text-main">{t.nav.preise}</a>
@@ -522,10 +527,9 @@ export default function App() {
           <video 
             ref={videoRef}
             autoPlay 
-            loop 
             muted 
-            defaultMuted
             playsInline 
+            loop 
             disablePictureInPicture
             tabIndex={-1}
             className="w-full h-full object-cover pointer-events-none"
