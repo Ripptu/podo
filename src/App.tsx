@@ -317,8 +317,8 @@ const translations: Record<string, any> = {
 // --- Components ---
 
 const SectionHeading = ({ title, centered = false }: { title: string, centered?: boolean }) => (
-  <div className={`mb-20 ${centered ? 'text-center max-w-3xl mx-auto' : 'max-w-2xl'}`}>
-    <h2 className="text-4xl md:text-5xl font-serif italic font-normal leading-tight text-text-main">
+  <div className={`mb-16 ${centered ? 'text-center max-w-3xl mx-auto' : 'max-w-2xl'}`}>
+    <h2 className="text-3xl md:text-4xl font-serif italic font-normal leading-tight text-text-main">
       {title}
     </h2>
   </div>
@@ -329,6 +329,7 @@ const WhatsAppButton = ({ text, primary = true, className = "" }: { text: string
     href="https://wa.me/4915568839795" 
     target="_blank" 
     rel="noopener noreferrer"
+    aria-label={text}
     className={`inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full font-medium transition-all duration-300 ${
       primary 
         ? 'bg-whatsapp text-white hover:bg-whatsapp-hover hover:shadow-lg hover:-translate-y-0.5' 
@@ -354,7 +355,7 @@ const BentoCard = ({ title, desc, className }: { title: string, desc: string, cl
 
   return (
     <motion.div 
-      className={`relative overflow-hidden p-10 rounded-3xl bg-surface-alt border border-gray-100 transition-all duration-300 group ${className}`}
+      className={`relative overflow-hidden p-8 rounded-3xl bg-surface-alt border border-gray-100 transition-all duration-300 group ${className}`}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -376,7 +377,7 @@ const BentoCard = ({ title, desc, className }: { title: string, desc: string, cl
         )}
       </AnimatePresence>
       <div className="relative z-10 h-full flex flex-col justify-end">
-        <h3 className="text-2xl md:text-3xl font-serif italic mb-4 text-text-main">{title}</h3>
+        <h3 className="text-xl md:text-2xl font-serif italic mb-4 text-text-main">{title}</h3>
         <p className="text-text-muted leading-relaxed">{desc}</p>
       </div>
     </motion.div>
@@ -406,10 +407,10 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-surface font-sans text-text-main overflow-x-hidden">
-      
+      <main>
       {/* --- Header --- */}
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'glass-card border-b border-gray-100' : 'bg-transparent'}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
             <div className="flex items-center gap-2">
@@ -435,6 +436,8 @@ export default function App() {
               <div className="relative">
                 <button 
                   onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+                  aria-label="Sprache wechseln / Change language"
+                  aria-expanded={langDropdownOpen}
                   className="flex items-center gap-1.5 text-sm font-medium text-text-muted hover:text-primary transition-colors py-2"
                 >
                   <Globe className="w-4 h-4" />
@@ -471,6 +474,8 @@ export default function App() {
             <button 
               className="md:hidden p-2 text-text-muted hover:text-primary"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? "Menü schließen" : "Menü öffnen"}
+              aria-expanded={isMobileMenuOpen}
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -523,7 +528,7 @@ export default function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-5xl lg:text-7xl xl:text-8xl font-bold leading-[1.1] tracking-tight mb-6 text-text-main">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6 text-text-main">
               {t.hero.title1} <span className="text-primary font-serif italic font-normal relative inline-block">
                 {t.hero.title2}
               </span>
@@ -534,6 +539,7 @@ export default function App() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
                 href="tel:+4915568839795" 
+                aria-label={t.hero.call}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full font-medium transition-all duration-300 bg-primary text-white hover:bg-primary-hover hover:shadow-lg hover:-translate-y-0.5"
               >
                 <Phone className="w-5 h-5" />
@@ -547,7 +553,7 @@ export default function App() {
 
       {/* --- Trusted By Section --- */}
       <section className="py-12 bg-surface">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-sm font-semibold tracking-widest text-text-muted uppercase mb-8">{t.trusted.title}</p>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-80 grayscale hover:grayscale-0 transition-all duration-500">
             {/* Simulating logos with text/stars for this specific request */}
@@ -570,14 +576,14 @@ export default function App() {
       </section>
 
       {/* --- Leistungen (Services) --- */}
-      <section id="leistungen" className="py-32 bg-surface">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="leistungen" className="py-20 md:py-32 bg-surface">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading 
             title={t.services.title}
             centered={true}
           />
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 auto-rows-[250px]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 auto-rows-[220px]">
             <BentoCard 
               title={t.services.s1_title}
               desc={t.services.s1_desc}
@@ -603,22 +609,22 @@ export default function App() {
       </section>
 
       {/* --- Standorte (Locations) --- */}
-      <section id="standorte" className="py-32 bg-surface-alt">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="standorte" className="py-20 md:py-32 bg-surface-alt">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading 
             title={t.locations.title}
             centered={true}
           />
 
-          <div className="grid lg:grid-cols-3 gap-10 items-center">
+          <div className="grid lg:grid-cols-3 gap-12 items-center">
             {/* Wesel */}
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-white rounded-3xl p-10 border border-gray-100 shadow-sm"
+              className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm"
             >
-              <h3 className="text-3xl font-serif italic mb-8 text-text-main">Wesel</h3>
+              <h3 className="text-2xl font-serif italic mb-8 text-text-main">Wesel</h3>
               <div className="space-y-5 mb-10">
                 <div className="flex items-start gap-4 text-text-muted">
                   <MapPin className="w-6 h-6 text-primary shrink-0 mt-0.5" />
@@ -646,12 +652,12 @@ export default function App() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-primary rounded-3xl p-10 shadow-2xl relative transform lg:-translate-y-6 text-white"
+              className="bg-primary rounded-3xl p-8 shadow-2xl relative transform lg:-translate-y-6 text-white"
             >
               <div className="absolute top-0 right-8 transform -translate-y-1/2 bg-whatsapp text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">
                 {t.locations.new}
               </div>
-              <h3 className="text-3xl font-serif italic mb-8">Dortmund</h3>
+              <h3 className="text-2xl font-serif italic mb-8">Dortmund</h3>
               <div className="space-y-5 mb-10">
                 <div className="flex items-start gap-4 text-white/90">
                   <MapPin className="w-6 h-6 text-white shrink-0 mt-0.5" />
@@ -679,9 +685,9 @@ export default function App() {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-white rounded-3xl p-10 border border-gray-100 shadow-sm"
+              className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm"
             >
-              <h3 className="text-3xl font-serif italic mb-8 text-text-main">Oberhausen</h3>
+              <h3 className="text-2xl font-serif italic mb-8 text-text-main">Oberhausen</h3>
               <div className="space-y-5 mb-10">
                 <div className="flex items-start gap-4 text-text-muted">
                   <MapPin className="w-6 h-6 text-primary shrink-0 mt-0.5" />
@@ -708,14 +714,14 @@ export default function App() {
       </section>
 
       {/* --- Security & Innovation --- */}
-      <section className="py-32 bg-surface overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-20 md:py-32 bg-surface overflow-hidden">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <SectionHeading 
             title={t.about.title}
             centered={true}
           />
 
-          <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-16 max-w-4xl mx-auto">
             {[
               { title: t.about.p1, icon: <ShieldCheck /> },
               { title: t.about.p2, icon: <Activity /> },
@@ -733,9 +739,9 @@ export default function App() {
       </section>
 
       {/* --- Testimonials --- */}
-      <section className="py-32 bg-surface">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <section className="py-20 md:py-32 bg-surface">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
             
             <div className="relative">
               {/* Main Image */}
@@ -745,6 +751,8 @@ export default function App() {
                   alt="Doctor" 
                   className="w-full h-auto object-cover"
                   referrerPolicy="no-referrer"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               
@@ -755,15 +763,10 @@ export default function App() {
                 viewport={{ once: true }}
                 className="absolute -bottom-8 -right-8 glass-card p-8 rounded-2xl shadow-xl max-w-xs"
               >
-                <div className="text-4xl font-bold text-primary mb-3">5.000+</div>
+                <div className="text-3xl font-bold text-primary mb-3">5.000+</div>
                 <p className="text-base font-medium text-text-main mb-1">{t.testimonials.stat}</p>
                 <p className="text-sm text-text-muted">{t.testimonials.stat_sub}</p>
               </motion.div>
-
-              {/* Patient Portrait Overlay */}
-              <div className="absolute -left-6 top-1/4 w-24 h-24 rounded-full border-4 border-white overflow-hidden shadow-lg">
-                <img src="https://i.pravatar.cc/150?img=32" alt="Patient" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-              </div>
             </div>
 
             <div>
@@ -774,7 +777,7 @@ export default function App() {
                 <svg className="absolute -top-8 -left-10 w-20 h-20 text-primary/10" fill="currentColor" viewBox="0 0 32 32">
                   <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
                 </svg>
-                <p className="text-2xl md:text-3xl font-medium text-text-main leading-relaxed relative z-10 mb-10">
+                <p className="text-xl md:text-2xl font-medium text-text-main leading-relaxed relative z-10 mb-10">
                   {t.testimonials.quote}
                 </p>
                 <div className="flex items-center gap-5">
@@ -791,18 +794,18 @@ export default function App() {
       </section>
 
       {/* --- Job / Karriere --- */}
-      <section id="karriere" className="py-32 bg-primary text-white overflow-hidden relative">
+      <section id="karriere" className="py-20 md:py-32 bg-primary text-white overflow-hidden relative">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 text-white text-sm font-semibold mb-8">
                 <Star className="w-4 h-4 fill-white" />
                 <span>{t.career.tag}</span>
               </div>
-              <h2 className="text-5xl md:text-6xl font-bold leading-tight mb-8">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-8">
                 {t.career.title}
               </h2>
               <p className="text-xl text-white/80 mb-10 leading-relaxed max-w-lg">
@@ -826,6 +829,8 @@ export default function App() {
                   alt="Praxis Team" 
                   className="w-full h-auto object-cover"
                   referrerPolicy="no-referrer"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -834,9 +839,9 @@ export default function App() {
       </section>
 
       {/* --- FAQ & Preise --- */}
-      <section id="preise" className="py-32 bg-surface">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-20">
+      <section id="preise" className="py-20 md:py-32 bg-surface">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-24">
             
             {/* FAQ */}
             <div>
@@ -852,7 +857,7 @@ export default function App() {
                 ].map((faq, idx) => (
                   <div key={idx} className="border border-gray-100 rounded-2xl overflow-hidden bg-surface-alt">
                     <button 
-                      className="w-full px-8 py-5 flex items-center justify-between text-left font-semibold text-text-main hover:text-primary transition-colors text-lg"
+                      className="w-full px-6 py-4 flex items-center justify-between text-left font-semibold text-text-main hover:text-primary transition-colors text-lg"
                       onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
                     >
                       {faq.q}
@@ -866,7 +871,7 @@ export default function App() {
                           exit={{ height: 0, opacity: 0 }}
                           className="overflow-hidden"
                         >
-                          <div className="px-8 pb-6 text-text-muted leading-relaxed text-lg">
+                          <div className="px-6 pb-5 text-text-muted leading-relaxed text-lg">
                             {faq.a}
                           </div>
                         </motion.div>
@@ -897,7 +902,7 @@ export default function App() {
                 ].map((price, idx) => (
                   <div key={idx} className="border border-gray-100 rounded-2xl overflow-hidden bg-white shadow-sm">
                     <button 
-                      className="w-full px-8 py-5 flex items-center justify-between text-left font-semibold text-text-main hover:text-primary transition-colors text-lg"
+                      className="w-full px-6 py-4 flex items-center justify-between text-left font-semibold text-text-main hover:text-primary transition-colors text-lg"
                       onClick={() => setActivePrice(activePrice === idx ? null : idx)}
                     >
                       {price.q}
@@ -911,7 +916,7 @@ export default function App() {
                           exit={{ height: 0, opacity: 0 }}
                           className="overflow-hidden"
                         >
-                          <div className="px-8 pb-6 text-text-muted leading-relaxed font-medium text-lg">
+                          <div className="px-6 pb-5 text-text-muted leading-relaxed font-medium text-lg">
                             {price.a}
                           </div>
                         </motion.div>
@@ -925,11 +930,12 @@ export default function App() {
           </div>
         </div>
       </section>
+      </main>
 
       {/* --- Footer --- */}
-      <footer className="bg-footer pt-32 pb-12 text-footer-text">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12 mb-20">
+      <footer className="bg-footer pt-20 md:pt-32 pb-12 text-footer-text">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-16 mb-20">
             
             {/* Brand Column */}
             <div className="col-span-2 lg:col-span-2">
@@ -938,17 +944,19 @@ export default function App() {
                   src="https://s1.directupload.eu/images/260329/372mrr6f.gif" 
                   alt="Podo Aktiv Logo" 
                   className="w-12 h-12 object-contain" 
+                  loading="lazy"
+                  decoding="async"
                 />
-                <span className="text-3xl font-bold tracking-tight text-white">Podo Aktiv</span>
+                <span className="text-2xl font-bold tracking-tight text-white">Podo Aktiv</span>
               </div>
               <p className="text-base leading-relaxed mb-10 max-w-sm">
                 {t.footer.desc}
               </p>
               <div className="flex gap-4">
-                <a href="#" className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+                <a href="#" aria-label="Website" className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
                   <Globe className="w-6 h-6" />
                 </a>
-                <a href="#" className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+                <a href="#" aria-label="WhatsApp Support" className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
                   <MessageCircle className="w-6 h-6" />
                 </a>
               </div>
